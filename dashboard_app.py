@@ -28,6 +28,7 @@ df_city_scatter = px.scatter(df_city, x='平均單價（萬/坪）', y='成交�
 df_city_scatter.update_layout({'legend':dict(orientation='h', y=-0.7,x=1, yanchor='bottom', xanchor='right')})
 
 app = dash.Dash(__name__)
+server = app.server
 
 app.layout = html.Div([
   html.Img(src=logo_link, 
