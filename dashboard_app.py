@@ -8,14 +8,14 @@ import warnings
 warnings.filterwarnings('ignore')
 logo_link = 'https://osaas.commerce.nccu.edu.tw/uploads/media/2374795345876d3e95e950baba9d273d.png'
 
-df_house=pd.read_csv('house price/sell/newtaipei_house_sell.csv')
+df_house=pd.read_csv('house price/sell/newtaipei_house_19-23.csv')
 df_house.drop_duplicates()
 df_resident=df_house[(df_house['交易標的']!='土地')&(df_house['交易標的']!='車位')& (df_house['單價元平方公尺'].notnull())&(df_house['都市土地使用分區']=='住')]
 df_resident[['交易年月日','總價元']]=df_resident[['交易年月日','總價元']].astype('int')
 df_resident[['建物移轉總面積平方公尺','單價元平方公尺']]=df_resident[['建物移轉總面積平方公尺','單價元平方公尺']].astype('float')
 df_resident['總坪數']=df_resident['建物移轉總面積平方公尺'].apply(lambda x:x/3.3)
 df_resident['單價元(坪)']=df_resident['單價元平方公尺'].apply(lambda x:x*3.3)
-df_resident=df_resident[df_resident['交易年月日']>1021231]
+df_resident=df_resident[df_resident['交易年月日']>1061231]
 df_resident[df_resident['交易年月日']==1040000]=df_resident[df_resident['交易年月日']==1040000].replace(1040000,1040101)
 df_resident['西元年月日']=df_resident['交易年月日'].apply(lambda x:x+19110000)
 df_resident['西元年月日']=pd.to_datetime(df_resident['西元年月日'].astype('str'),format='%Y%m%d')
