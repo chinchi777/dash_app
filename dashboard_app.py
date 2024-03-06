@@ -15,8 +15,7 @@ df_resident[['交易年月日','總價元']]=df_resident[['交易年月日','總
 df_resident[['建物移轉總面積平方公尺','單價元平方公尺']]=df_resident[['建物移轉總面積平方公尺','單價元平方公尺']].astype('float')
 df_resident['總坪數']=df_resident['建物移轉總面積平方公尺'].apply(lambda x:x/3.3)
 df_resident['單價元(坪)']=df_resident['單價元平方公尺'].apply(lambda x:x*3.3)
-df_resident=df_resident[df_resident['交易年月日']>1061231]
-df_resident[df_resident['交易年月日']==1040000]=df_resident[df_resident['交易年月日']==1040000].replace(1040000,1040101)
+df_resident=df_resident[df_resident['交易年月日']>1071231]
 df_resident['西元年月日']=df_resident['交易年月日'].apply(lambda x:x+19110000)
 df_resident['西元年月日']=pd.to_datetime(df_resident['西元年月日'].astype('str'),format='%Y%m%d')
 df_resident['西元年']=df_resident['西元年月日'].dt.strftime("%Y")
@@ -65,13 +64,14 @@ def update_major_city_hover(hoverData):
         hover_city = hoverData['points'][0]['customdata'][0]
 
     major_city_df = df_resident[df_resident['鄉鎮市區'] == hover_city]
-    major_city_agg = major_city_df.groupby('西元年')['單價元(坪)'].agg(['mean', 'count']).reset_index().rename(columns={'count':'成交件數', 'mean':'平均單價（坪）'})
+    major_city_agg = major_city_df.groupby(['西元年','交易類型'])['單價元(坪)'].agg(['mean', 'count']).reset_index().rename(columns={'count':'成交件數', 'mean':'平均單價（坪）'})
 
     house_bar_major_city = px.line(major_city_agg, x='西元年',
                                 # Ensure the Major category will be available
                                 custom_data=['西元年'],
                                 y='成交件數',height=300, markers=True,
-                                title=f'{hover_city}歷年成交件數')
+                                color='交易類型',
+                                title=f'{hover_city}歷年預售屋與中古屋成交件數')
     house_bar_major_city.update_layout({'margin':dict(l=10,r=15,t=40,b=0), 'title':{'x':0.5}})
 
     return house_bar_major_city
