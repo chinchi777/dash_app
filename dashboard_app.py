@@ -8,7 +8,7 @@ import warnings
 warnings.filterwarnings('ignore')
 logo_link = 'https://osaas.commerce.nccu.edu.tw/uploads/media/2374795345876d3e95e950baba9d273d.png'
 
-df_house=pd.read_csv('house price/sell/newtaipei_house_19-23.csv')
+df_house=pd.read_csv('newtaipei_house_19-23.csv')
 df_house.drop_duplicates()
 df_resident=df_house[(df_house['交易標的']!='土地')&(df_house['交易標的']!='車位')& (df_house['單價元平方公尺'].notnull())&(df_house['都市土地使用分區']=='住')]
 df_resident[['交易年月日','總價元']]=df_resident[['交易年月日','總價元']].astype('int')
