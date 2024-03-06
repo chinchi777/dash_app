@@ -102,7 +102,7 @@ def update_major_city_click(clickData):
     house_bar_city_mj_ct.update_layout({'yaxis':{'categoryorder':'total ascending'}, 'title':{'x':0.5}})
 
     return house_bar_city_mj_ct  
-  
 
+  
 if __name__ == '__main__':
     app.run_server(debug=True)
