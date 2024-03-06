@@ -6,7 +6,7 @@ import numpy as np
 from dash.dependencies import Input, Output
 import warnings
 warnings.filterwarnings('ignore')
-logo_link = 'https://osaas.commerce.nccu.edu.tw/uploads/media/2374795345876d3e95e950baba9d273d.png'
+logo_link = 'https://raw.githubusercontent.com/chinchi777/dash_app/main/real_estate_report_logo.png'
 
 df_house=pd.read_csv('newtaipei_house_19-23.csv')
 df_house.drop_duplicates()
@@ -32,7 +32,7 @@ server = app.server
 
 app.layout = html.Div([
   html.Img(src=logo_link, 
-        style={'width':'300px','margin':'30px 0px 0px 0px' }),
+        style={'width':'600px','margin':'30px 0px 0px 0px' }),
   html.H1('新北市2019~2023年房價與成交件數概況'),
   html.Div(
     children=[
